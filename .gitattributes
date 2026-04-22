@@ -1,0 +1,5 @@
+# Mark files produced by `task render` as generated. GitHub folds
+# these in PR review and excludes them from "Languages" stats — keeps
+# the signal-to-noise ratio high when reviewing shared/ changes.
+codex/AGENTS.md                                        linguist-generated=true
+claude/plugins/dotai-base/skills/**/SKILL.md           linguist-generated=true

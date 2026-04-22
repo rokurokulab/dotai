@@ -1,0 +1,66 @@
+# Example .codex/config.toml — Codex CLI per-project configuration.
+#
+# Codex walks from the project root to the working directory, loading
+# every .codex/config.toml it finds. The file closest to the working
+# directory wins for any conflicting key. Place this at your repo root
+# as `.codex/config.toml` (drop the `.example` suffix and edit).
+#
+# Full reference: https://developers.openai.com/codex/config-basic
+#                 https://developers.openai.com/codex/config-advanced
+
+# Default model. Pick the smallest one that does the job; bump on demand.
+# model = "gpt-5.4"
+
+# Approval policy — how aggressively Codex asks for confirmation.
+#   "untrusted"  — ask before any tool use (paranoid; good for new repos)
+#   "on-request" — only ask for risky tools (delete, push, network)
+#   "never"      — never ask (use only inside sandboxes / CI)
+# approval_policy = "on-request"
+
+# Sandbox mode. "workspace-write" is the safe default; the agent can
+# read anywhere but only write inside the workspace.
+# sandbox_mode = "workspace-write"
+
+# Web search policy.
+#   "cached"   — only re-use results Codex has already fetched
+#   "live"     — issue fresh requests (uses tokens / quota)
+#   "disabled" — no web search at all
+# web_search = "cached"
+
+# Reasoning budget. "low" / "medium" / "high". High = better answers,
+# slower + more tokens.
+# model_reasoning_effort = "medium"
+
+# Tone. "friendly" / "pragmatic" / "none".
+# personality = "pragmatic"
+
+# Where to drop session logs (relative to project root or absolute).
+# log_dir = ".codex/logs"
+
+# ──────────────────────────────────────────────────────────────────
+# Named profiles — switch with `codex --profile <name>` or by env var
+# ──────────────────────────────────────────────────────────────────
+
+# [profiles.review]
+# model_reasoning_effort = "high"
+# approval_policy = "untrusted"
+
+# [profiles.fastdraft]
+# model = "gpt-5.4-mini"
+# model_reasoning_effort = "low"
+
+# ──────────────────────────────────────────────────────────────────
+# Shell environment policy — what env vars Codex can see
+# ──────────────────────────────────────────────────────────────────
+
+# [shell_environment_policy]
+# include_only = ["PATH", "HOME", "LANG", "LC_*", "TERM"]
+
+# ──────────────────────────────────────────────────────────────────
+# Feature toggles
+# ──────────────────────────────────────────────────────────────────
+
+# [features]
+# shell_snapshot = true     # cache shell state for faster cold starts
+# memories       = true     # cross-session memory
+# multi_agent    = false    # opt into experimental sub-agent routing

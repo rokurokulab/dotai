@@ -22,6 +22,9 @@ jobs:
         with:
           config: licenserc.toml
 
+      - name: Render check — ecosystem dirs must match shared/
+        run: bash scripts/render.sh --check
+
       # Each find pipes through `xargs -r` so empty inputs don't fail
       # the step — keeps CI green during bootstrap when most dirs are
       # still TODO. Once a category exists, real validation kicks in.
