@@ -20,14 +20,14 @@ tasks:
       - 'find . -path ./.git -prune -o \( -name "*.sh" -o -name "*.bash" \) -print | xargs -r shellcheck'
 
   render:
-    desc: 'TODO (commit 06): materialize shared/ into ecosystem dirs.'
+    desc: Materialize shared/ into ecosystem dirs (codex/AGENTS.md, claude/plugins/dotai-base/skills/).
     cmds:
-      - 'echo "TODO: scripts/render.sh lands in commit 06."'
+      - bash scripts/render.sh --write
 
   render-check:
-    desc: 'TODO (commit 06): verify ecosystem dirs are up to date with shared/.'
+    desc: Fail if any ecosystem file diverges from shared/. CI uses this to block merges that forget to re-render.
     cmds:
-      - 'echo "TODO: scripts/render.sh lands in commit 06."'
+      - bash scripts/render.sh --check
 
   test-install:
     desc: 'TODO (commit 10): smoke-test install.sh into a throwaway target.'

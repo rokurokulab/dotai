@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "dotai",
+  "description": "Cross-tool AI coding agent config registry. Reusable skills, sub-agents, hooks, and slash commands that drop into any project — installable via Claude Code's native marketplace, OpenAI Codex, or the dotai curl|sh installer.",
+  "owner": {
+    "name": "rokurokulab",
+    "email": "itscheems@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "dotai-base",
+      "description": "Reusable skills (code-review, commit-message, changelog) plus the implementer sub-agent. Generic, project-agnostic, no shell side effects.",
+      "source": "./claude/plugins/dotai-base",
+      "version": "0.0.0",
+      "category": "development",
+      "tags": ["skills", "agents", "community-managed"],
+      "keywords": ["code-review", "commit-message", "changelog", "implementer"],
+      "homepage": "https://github.com/rokurokulab/dotai"
+    }
+  ]
+}
