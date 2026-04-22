@@ -1,0 +1,20 @@
+# bundles/conventions.toml
+#
+# A safe, opinionated default for a new repo: AGENTS.md, three reusable
+# skills the model can invoke, and the dotai-base CC plugin (skills +
+# implementer sub-agent). NO hooks, NO commands — nothing that runs
+# shell automatically. Add bundles/everything.toml if you also want the
+# post-edit-lint hook and /pr-summary command.
+
+name = "conventions"
+description = "AGENTS.md + 3 skills + dotai-base plugin. No auto-side-effects."
+
+[contents.shared]
+agents_md = true
+skills = ["code-review", "commit-message", "changelog"]
+
+[contents.claude]
+plugins = ["dotai-base"]
+
+[contents.codex]
+example_config = true

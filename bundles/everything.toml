@@ -1,0 +1,22 @@
+# bundles/everything.toml
+#
+# The full dotai kit. Includes dotai-conventions, which installs a
+# PostToolUse hook (`post-edit-lint`) that runs shell on every Edit/Write
+# event. The hook is best-effort and never blocks, but it IS shell
+# executing inside your CC session — install.sh will print the exact
+# command and a 3-second confirmation countdown before installing it.
+# Pass --no-hooks to install.sh to skip hooks even when this bundle
+# requests them.
+
+name = "everything"
+description = "AGENTS.md + all skills + both plugins. Includes the post-edit-lint hook."
+
+[contents.shared]
+agents_md = true
+skills = ["code-review", "commit-message", "changelog"]
+
+[contents.claude]
+plugins = ["dotai-base", "dotai-conventions"]
+
+[contents.codex]
+example_config = true

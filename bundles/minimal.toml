@@ -1,0 +1,30 @@
+# bundles/minimal.toml
+#
+# The smallest meaningful install: just the cross-tool AGENTS.md.
+# Use this when you want one file every coding agent will read,
+# without any skills, plugins, hooks, or commands.
+
+name = "minimal"
+description = "Just AGENTS.md. Nothing else."
+
+# ─────────────────────────────────────────────────────────────
+# What lands per ecosystem (set false / [] to skip a category).
+# Schema is intentionally flat so install.sh can parse it with awk.
+# ─────────────────────────────────────────────────────────────
+
+[contents.shared]
+# Drop shared/AGENTS.md as <target>/AGENTS.md.
+agents_md = true
+# SKILL.md sources to install (matched against shared/skills/<name>/).
+skills = []
+
+[contents.claude]
+# Claude Code plugins from claude/plugins/<name>/ (installed verbatim
+# under <target>/.claude/plugins/<name>/ for the curl-installer path;
+# for the native /plugin marketplace add path, this list is informational).
+plugins = []
+
+[contents.codex]
+# Drop codex/.codex/config.toml.example as <target>/.codex/config.toml
+# (skip if file already exists unless --force).
+example_config = false
