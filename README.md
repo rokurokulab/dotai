@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/rokurokulab/dotai)](https://github.com/rokurokulab/dotai/releases)
 
+> **English** | [简体中文](docs/zh-CN/README.md)
+
 A cross-tool **AI coding agent config registry & installer**. One repo to host the AGENTS.md, SKILL.md, plugins, hooks, and slash commands you want to share across [Claude Code](https://www.anthropic.com/claude-code), [OpenAI Codex CLI](https://developers.openai.com/codex/), and (later) other agentic CLIs — installed selectively into target repos via either the tool's native marketplace **or** a single `curl | sh` installer.
 
 ## Two ways in
