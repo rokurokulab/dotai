@@ -1,0 +1,81 @@
+name: Smoke Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    name: install ${{ matrix.tool }} / ${{ matrix.bundle }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tool: [claude, codex]
+        bundle: [minimal, conventions]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run install.sh against PR branch (or main on push)
+        env:
+          TOOL: ${{ matrix.tool }}
+          BUNDLE: ${{ matrix.bundle }}
+        run: |
+          set -euo pipefail
+          REF="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME:-main}}"
+          SRC="${GITHUB_REPOSITORY:-rokurokulab/dotai}"
+          target=$(mktemp -d -t dotai-smoke.XXXXXX)
+          echo "::group::install $TOOL / $BUNDLE from $SRC@$REF → $target"
+          bash scripts/install.sh \
+            --tools "$TOOL" \
+            --bundle "$BUNDLE" \
+            --target "$target" \
+            --ref "$REF" \
+            --source "$SRC" \
+            --yes
+          echo "::endgroup::"
+          echo "TARGET=$target" >>"$GITHUB_ENV"
+
+      - name: Verify expected files per (tool, bundle)
+        env:
+          TOOL: ${{ matrix.tool }}
+          BUNDLE: ${{ matrix.bundle }}
+        run: |
+          set -euo pipefail
+          : "${TARGET:?TARGET not set by previous step}"
+
+          # AGENTS.md is always installed (every bundle has agents_md=true).
+          test -f "$TARGET/AGENTS.md"
+
+          # Conventions bundle — claude side: skills + dotai-base plugin
+          if [ "$TOOL" = "claude" ] && [ "$BUNDLE" = "conventions" ]; then
+            test -f "$TARGET/.claude/skills/code-review/SKILL.md"
+            test -f "$TARGET/.claude/skills/commit-message/SKILL.md"
+            test -f "$TARGET/.claude/skills/changelog/SKILL.md"
+            test -f "$TARGET/.claude/plugins/dotai-base/.claude-plugin/plugin.json"
+            test -f "$TARGET/.claude/plugins/dotai-base/agents/implementer.md"
+            jq empty "$TARGET/.claude/plugins/dotai-base/.claude-plugin/plugin.json"
+          fi
+
+          # Conventions bundle — codex side: example config materialized
+          if [ "$TOOL" = "codex" ] && [ "$BUNDLE" = "conventions" ]; then
+            test -f "$TARGET/.codex/config.toml"
+          fi
+
+          # Minimal bundle: AGENTS.md only — assert no plugin tree leaked in.
+          if [ "$BUNDLE" = "minimal" ]; then
+            test ! -e "$TARGET/.claude/plugins"
+            test ! -e "$TARGET/.codex/config.toml"
+          fi
+
+          echo "✓ ($TOOL, $BUNDLE) expected files present"
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf "${TARGET:-/tmp/nonexistent-dotai-target}"
