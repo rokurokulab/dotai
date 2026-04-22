@@ -35,10 +35,10 @@ EOF
     exit 2
 }
 
-mode=write
+mode="write"
 case "${1:-}" in
-    --write|"") mode=write ;;
-    --check)    mode=check ;;
+    --write|"") mode="write" ;;
+    --check)    mode="check" ;;
     -h|--help)  usage ;;
     *)          usage ;;
 esac
