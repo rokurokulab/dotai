@@ -1,0 +1,17 @@
+{
+  "description": "PostToolUse hook that lints files just written/edited by the agent.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/post-edit-lint.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
