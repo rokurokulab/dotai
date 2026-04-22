@@ -17,7 +17,7 @@ curl -sSL https://github.com/rokurokulab/dotai/releases/download/v0.1.0/install.
   | sh -s -- --tools claude,codex --bundle conventions
 ```
 
-Full install matrix and bundle contents will live at [`docs/installing.md`](docs/installing.md) once `v0.1.0` ships.
+Full install matrix, bundle contents, and flag reference live at [`docs/installing.md`](docs/installing.md).
 
 ## Why this repo
 
