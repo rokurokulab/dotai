@@ -1,0 +1,27 @@
+# Editors / IDEs
+.vscode/
+.cursor/
+.idea/
+*.swp
+*~
+
+# OS
+**/.DS_Store
+
+# Local test/debug artifacts (NEVER commit; safety net for the
+# "smoke-test then cleanup" rule)
+render-out/
+tmp/
+/tmp/dotai-test-*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Node (in case anyone adds tooling later)
+node_modules/
