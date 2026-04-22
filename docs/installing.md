@@ -1,5 +1,7 @@
 # Installing dotai
 
+> **English** | [简体中文](zh-CN/installing.md)
+
 Two ways to consume dotai content. They use the same source repo and can be combined freely.
 
 ## Option A — Claude Code native marketplace
