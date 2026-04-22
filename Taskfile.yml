@@ -30,6 +30,19 @@ tasks:
       - bash scripts/render.sh --check
 
   test-install:
-    desc: 'TODO (commit 10): smoke-test install.sh into a throwaway target.'
+    desc: Smoke-test install.sh into a throwaway /tmp target (uses --ref main from live remote; cleans up after).
     cmds:
-      - 'echo "TODO: scripts/install.sh lands in commit 10."'
+      - |
+        set -eu
+        target=$(mktemp -d -t dotai-test-install.XXXXXX)
+        trap 'rm -rf "$target"' EXIT
+        echo "==> install.sh dry-run (minimal/claude)"
+        bash scripts/install.sh --tools claude --bundle minimal --target "$target" --ref main --dry-run
+        echo "==> install.sh real install (everything/claude+codex)"
+        bash scripts/install.sh --tools claude,codex --bundle everything --target "$target" --ref main --yes
+        echo "==> verifying installed tree"
+        test -f "$target/AGENTS.md"
+        test -f "$target/.claude/plugins/dotai-base/.claude-plugin/plugin.json"
+        test -f "$target/.claude/plugins/dotai-conventions/hooks/hooks.json"
+        test -f "$target/.codex/config.toml"
+        echo "==> ok ($target will be cleaned up by trap)"
