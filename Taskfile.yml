@@ -1,0 +1,35 @@
+# https://taskfile.dev — task runner.
+# Run `task --list` to see available recipes.
+version: "3"
+
+tasks:
+  default:
+    desc: List available tasks.
+    cmds:
+      - task --list
+
+  lint:
+    desc: Static checks (license headers + JSON/YAML schema + shellcheck).
+    cmds:
+      - hawkeye check
+      # Validate every JSON file we ship.
+      - 'find . -path ./.git -prune -o -name "*.json" -print | xargs -I{} jq empty {}'
+      # Validate every workflow YAML by loading it.
+      - 'find .github/workflows -name "*.yml" -o -name "*.yaml" 2>/dev/null | xargs -I{} python3 -c "import yaml,sys; yaml.safe_load(open(sys.argv[1]))" {} || true'
+      # shellcheck every shell script we ship (no-op until commit 06+).
+      - 'find . -path ./.git -prune -o \( -name "*.sh" -o -name "*.bash" \) -print | xargs -r shellcheck'
+
+  render:
+    desc: 'TODO (commit 06): materialize shared/ into ecosystem dirs.'
+    cmds:
+      - 'echo "TODO: scripts/render.sh lands in commit 06."'
+
+  render-check:
+    desc: 'TODO (commit 06): verify ecosystem dirs are up to date with shared/.'
+    cmds:
+      - 'echo "TODO: scripts/render.sh lands in commit 06."'
+
+  test-install:
+    desc: 'TODO (commit 10): smoke-test install.sh into a throwaway target.'
+    cmds:
+      - 'echo "TODO: scripts/install.sh lands in commit 10."'
