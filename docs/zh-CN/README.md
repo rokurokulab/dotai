@@ -9,14 +9,29 @@
 
 跨工具的 **AI 编码 Agent 配置注册表与安装器**。一个仓库集中托管你想跨 [Claude Code](https://www.anthropic.com/claude-code)、[OpenAI Codex CLI](https://developers.openai.com/codex/) 以及（未来）其他 Agentic CLI 共享的 AGENTS.md、SKILL.md、插件、hooks 和 slash commands —— 通过工具自带的 marketplace **或** 一行 `curl | sh` 安装器，按需装入目标仓库。
 
-## 两种使用方式
+## 组件数量
+
+| 组件            | 数量                                                                                      |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| 插件（Plugins） | 2 (`dotai-base`、`dotai-conventions`)                                                     |
+| 技能（Skills）  | 7 (`code-review`、`commit-message`、`changelog`、`github-pr`、`github-issue`、`github-milestone`、`repo-exploration`) |
+| 子 Agent        | 1 (`implementer`)                                                                         |
+| Hooks           | 2 (`guard-git` PreToolUse、`post-edit-lint` PostToolUse)                                  |
+| Slash 命令      | 1 (`/pr-summary`)                                                                         |
+
+## 安装
+
+### Claude Code marketplace
 
 ```sh
-# 原生方式：Claude Code marketplace（无需安装器）
-/plugin marketplace add rokurokulab/dotai
+/plugin marketplace add https://github.com/rokurokulab/dotai
 /plugin install dotai-base@dotai
+/plugin install dotai-conventions@dotai
+```
 
-# 通用方式：一键安装器（适用于任何工具/项目）
+### `curl | sh` 安装器（适用于任何工具/项目）
+
+```sh
 curl -sSL https://github.com/rokurokulab/dotai/releases/download/v0.1.0/install.sh \
   | sh -s -- --tools claude,codex --bundle conventions
 ```
