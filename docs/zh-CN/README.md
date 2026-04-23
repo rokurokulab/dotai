@@ -36,10 +36,6 @@ curl -sSL https://github.com/rokurokulab/dotai/releases/download/v0.1.0/install.
   | sh -s -- --tools claude,codex --bundle conventions
 ```
 
-### 官方 marketplace
-
-加入 `@claude-plugins-official` 的审核仍在进行中。上架后命令将变为 `/plugin install dotai-base@claude-plugins-official`。
-
 完整安装矩阵、bundle 内容与参数说明：[`installing.md`](installing.md)（中文） / [`docs/installing.md`](../installing.md)（English）。
 
 ## 为什么需要这个仓库

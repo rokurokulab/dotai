@@ -36,10 +36,6 @@ curl -sSL https://github.com/rokurokulab/dotai/releases/download/v0.1.0/install.
   | sh -s -- --tools claude,codex --bundle conventions
 ```
 
-### Official marketplace
-
-Inclusion in `@claude-plugins-official` is pending. Once listed, install will be `/plugin install dotai-base@claude-plugins-official`.
-
 Full install matrix, bundle contents, and flag reference live at [`docs/installing.md`](docs/installing.md).
 
 ## Why this repo
