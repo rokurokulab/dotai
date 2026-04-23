@@ -20,7 +20,7 @@ tasks:
       - 'find . -path ./.git -prune -o \( -name "*.sh" -o -name "*.bash" \) -print | xargs -r shellcheck'
 
   render:
-    desc: Materialize shared/ into ecosystem dirs (codex/AGENTS.md, claude/plugins/dotai-base/skills/).
+    desc: Materialize shared/ into ecosystem dirs (codex/AGENTS.md, claude/plugins/dotai-base/skills/, codex/skills/).
     cmds:
       - bash scripts/render.sh --write
 

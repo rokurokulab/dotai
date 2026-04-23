@@ -1,6 +1,6 @@
 {
   "name": "dotai-base",
-  "description": "Reusable skills (code-review, commit-message, changelog) and the implementer sub-agent. Source skills are mirrored from dotai's shared/ directory.",
+  "description": "Reusable skills (code-review, commit-message, changelog, github-pr, github-issue, github-milestone, repo-exploration) and the implementer sub-agent. Source skills are mirrored from dotai's shared/ directory.",
   "version": "0.0.0",
   "author": {
     "name": "rokurokulab"

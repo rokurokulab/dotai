@@ -285,6 +285,15 @@ if [ "$has_claude" = "1" ] && [ -n "$shared_skills" ]; then
     done
 fi
 
+# Shared skills → codex (if --tools codex)
+if [ "$has_codex" = "1" ] && [ -n "$shared_skills" ]; then
+    for skill in $shared_skills; do
+        if [ -f "$src_dir/shared/skills/$skill/SKILL.md" ]; then
+            echo "  skill $skill → $target/.codex/skills/$skill/SKILL.md" >> "$plan"
+        fi
+    done
+fi
+
 # Claude plugins (whole dir)
 if [ "$has_claude" = "1" ] && [ -n "$claude_plugins" ]; then
     for plugin in $claude_plugins; do
@@ -388,6 +397,16 @@ if [ "$has_claude" = "1" ] && [ -n "$shared_skills" ]; then
         if [ -f "$src_dir/shared/skills/$skill/SKILL.md" ]; then
             copy_or_skip "$src_dir/shared/skills/$skill/SKILL.md" \
                          "$target/.claude/skills/$skill/SKILL.md"
+        fi
+    done
+fi
+
+# Shared skills (codex standalone)
+if [ "$has_codex" = "1" ] && [ -n "$shared_skills" ]; then
+    for skill in $shared_skills; do
+        if [ -f "$src_dir/shared/skills/$skill/SKILL.md" ]; then
+            copy_or_skip "$src_dir/shared/skills/$skill/SKILL.md" \
+                         "$target/.codex/skills/$skill/SKILL.md"
         fi
     done
 fi
