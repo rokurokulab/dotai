@@ -9,17 +9,36 @@
 
 A cross-tool **AI coding agent config registry & installer**. One repo to host the AGENTS.md, SKILL.md, plugins, hooks, and slash commands you want to share across [Claude Code](https://www.anthropic.com/claude-code), [OpenAI Codex CLI](https://developers.openai.com/codex/), and (later) other agentic CLIs — installed selectively into target repos via either the tool's native marketplace **or** a single `curl | sh` installer.
 
-## Two ways in
+## Components
+
+| Component      | Count                                                                                     |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| Plugins        | 2 (`dotai-base`, `dotai-conventions`)                                                     |
+| Skills         | 7 (`code-review`, `commit-message`, `changelog`, `github-pr`, `github-issue`, `github-milestone`, `repo-exploration`) |
+| Sub-agents     | 1 (`implementer`)                                                                         |
+| Hooks          | 2 (`guard-git` PreToolUse, `post-edit-lint` PostToolUse)                                  |
+| Slash commands | 1 (`/pr-summary`)                                                                         |
+
+## Install
+
+### Claude Code marketplace
 
 ```sh
-# Native: Claude Code marketplace (no installer dependency)
-/plugin marketplace add rokurokulab/dotai
+/plugin marketplace add https://github.com/rokurokulab/dotai
 /plugin install dotai-base@dotai
+/plugin install dotai-conventions@dotai
+```
 
-# Generic: one-shot installer (works for any tool / project)
+### `curl | sh` installer (any tool / project)
+
+```sh
 curl -sSL https://github.com/rokurokulab/dotai/releases/download/v0.1.0/install.sh \
   | sh -s -- --tools claude,codex --bundle conventions
 ```
+
+### Official marketplace
+
+Inclusion in `@claude-plugins-official` is pending. Once listed, install will be `/plugin install dotai-base@claude-plugins-official`.
 
 Full install matrix, bundle contents, and flag reference live at [`docs/installing.md`](docs/installing.md).
 
