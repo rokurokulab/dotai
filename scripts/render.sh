@@ -21,6 +21,7 @@
 # Mappings (keep in sync with claude/plugins/dotai-base/.claude-plugin/plugin.json):
 #   shared/AGENTS.md             → codex/AGENTS.md
 #   shared/skills/<n>/SKILL.md   → claude/plugins/dotai-base/skills/<n>/SKILL.md
+#   shared/skills/<n>/SKILL.md   → codex/skills/<n>/SKILL.md
 #
 # POSIX sh: no bashisms.
 
@@ -84,7 +85,7 @@ render_one() {
 # 1. AGENTS.md → codex
 render_one shared/AGENTS.md codex/AGENTS.md
 
-# 2. Skills → CC dotai-base plugin
+# 2. Skills → CC dotai-base plugin + codex/skills (dual output)
 for skill_dir in shared/skills/*/; do
     # Guard against empty glob (no skills yet).
     [ -d "$skill_dir" ] || continue
@@ -92,6 +93,9 @@ for skill_dir in shared/skills/*/; do
     render_one \
         "shared/skills/$skill_name/SKILL.md" \
         "claude/plugins/dotai-base/skills/$skill_name/SKILL.md"
+    render_one \
+        "shared/skills/$skill_name/SKILL.md" \
+        "codex/skills/$skill_name/SKILL.md"
 done
 
 if [ "$mode" = check ]; then
