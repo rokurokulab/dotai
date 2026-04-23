@@ -9,12 +9,12 @@
   "plugins": [
     {
       "name": "dotai-base",
-      "description": "Reusable skills (code-review, commit-message, changelog) plus the implementer sub-agent. Generic, project-agnostic, no shell side effects.",
+      "description": "Reusable skills (code-review, commit-message, changelog, github-pr, github-issue, github-milestone, repo-exploration) plus the implementer sub-agent. Generic, project-agnostic, no shell side effects.",
       "source": "./claude/plugins/dotai-base",
       "version": "0.0.0",
       "category": "development",
       "tags": ["skills", "agents", "community-managed"],
-      "keywords": ["code-review", "commit-message", "changelog", "implementer"],
+      "keywords": ["code-review", "commit-message", "changelog", "github-pr", "github-issue", "github-milestone", "repo-exploration", "implementer"],
       "homepage": "https://github.com/rokurokulab/dotai"
     },
     {
