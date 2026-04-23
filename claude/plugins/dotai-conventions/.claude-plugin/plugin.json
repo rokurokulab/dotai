@@ -1,6 +1,6 @@
 {
   "name": "dotai-conventions",
-  "description": "Active conventions enforcement: a PostToolUse hook that lints just-written files (best-effort, never blocks) and a /pr-summary slash command that drafts a PR title + description from the current branch's diff.",
+  "description": "Active conventions: a PreToolUse git/gh guard (fail-open), a PostToolUse lint hook (best-effort, never blocks), and a /pr-summary slash command.",
   "version": "0.0.0",
   "author": {
     "name": "rokurokulab"

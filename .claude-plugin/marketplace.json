@@ -19,12 +19,12 @@
     },
     {
       "name": "dotai-conventions",
-      "description": "Active conventions: a PostToolUse lint hook (best-effort, never blocks) and a /pr-summary slash command. Opt in only when you want side-effects on Edit/Write.",
+      "description": "Active conventions: a PreToolUse git/gh guard (fail-open), a PostToolUse lint hook (best-effort, never blocks), and a /pr-summary slash command. Opt in only when you want the hooks to run.",
       "source": "./claude/plugins/dotai-conventions",
       "version": "0.0.0",
       "category": "development",
       "tags": ["hooks", "commands", "community-managed"],
-      "keywords": ["lint", "pr-summary", "post-edit"],
+      "keywords": ["guard-git", "lint", "pr-summary", "post-edit"],
       "homepage": "https://github.com/rokurokulab/dotai"
     }
   ]
